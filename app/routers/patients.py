@@ -4,4 +4,6 @@ router = APIRouter()
 
 @router.get("")
 def get_patient():
-    return {"HELLOOOO"}
+    pass
+
+

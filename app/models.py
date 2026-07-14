@@ -10,7 +10,7 @@ class AppointmentStatus(str,Enum):
         CONFIRMED = "confirmed"
         COMPLETED = "completed"
         CANCELLED = "cancelled"
-        NO_SHOW = "no_show "
+        NO_SHOW = "no_show"
 
 class Patient(Base):
     __tablename__ = 'patient'
@@ -24,19 +24,19 @@ class Patient(Base):
     
     
 class Appointment(Base):
-    __tablename__ = 'appointment '
+    __tablename__ = 'appointment'
     appointment_id : Mapped[int] = mapped_column(primary_key= True)
     dentist_id: Mapped[int] = mapped_column(nullable = False)
     appointment_info: Mapped[str] = mapped_column(nullable = True)
     appointment_date : Mapped[date] = mapped_column(Date,nullable = False) 
-    status: Mapped [AppointmentStatus] = mapped_column(
-        AppointmentStatus.SCHEDULED,
-        nullable = False
+    status: Mapped[AppointmentStatus] = mapped_column(
+        default=AppointmentStatus.SCHEDULED,
+        nullable=False
     )
     patient_id : Mapped[int] = mapped_column(
-        ForeignKey('patient.id')
+        ForeignKey('patient.patient_id')
     )
     
     patient : Mapped["Patient"] = relationship(
-        back_populates = 'appointment'
+        back_populates = 'appointments'
     )
