@@ -1,16 +1,14 @@
 from sqlalchemy import create_engine
 from sqlalchemy.orm import DeclarativeBase
 from dotenv import load_dotenv
-import os 
+import os
 
-load_dotenv() 
+load_dotenv()
 
-DATABSE_URL = os.getenv("DATABASE_URL")
+DATABASE_URL = os.getenv("DATABASE_URL")
     
 engine = create_engine(
-    DATABSE_URL,echo=True)
-
-
+    DATABASE_URL, echo=True)
 
 class Base(DeclarativeBase):
     pass
