@@ -3,5 +3,5 @@ from sqlalchemy.orm import Session
 router = APIRouter()
 
 @router.get("")
-def get_patient(db:Session,patient_id=patient_id):
+def get_patient():
     return {"HELLOOOO"}
