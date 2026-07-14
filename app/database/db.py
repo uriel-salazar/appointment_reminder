@@ -8,7 +8,8 @@ load_dotenv()
 DATABSE_URL = os.getenv("DATABASE_URL")
     
 engine = create_engine(
-    URL,echo=True)
+    DATABSE_URL,echo=True)
+
 
 
 class Base(DeclarativeBase):
