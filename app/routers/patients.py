@@ -1,6 +1,6 @@
 from fastapi import APIRouter, Depends
 from sqlalchemy.orm import Session
-from models import Patient
+from app.models.patient import Patient
 from schemas import CreatePatient
 from database.db import get_db
 router = APIRouter()
@@ -17,4 +17,7 @@ def create_patient(patient:CreatePatient ,db:Session = Depends(get_db)):
     db.commit()
     db.refresh(db_patient)
     return db_patient
+
+@router.put("")
+def update_patient(patient:U)
 
