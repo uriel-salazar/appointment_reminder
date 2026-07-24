@@ -1,17 +1,33 @@
 from pydantic import BaseModel
-from app.models.appointment import AppointmentStatus
+from models.appointment import AppointmentStatus
 
-class CreatePatient(BaseModel):
+class PatientBase(BaseModel):
     name:str
-    patient_info:str
+    info:str
     cellphone_number:str
+
+
+class CreatePatient(PatientBase):
+    pass
     
-class CreateAppointment(BaseModel):
+class UpdatePatient(PatientBase):
+    pass
+
+
+class AppointmentBase(BaseModel):
     appointment_info:str
     appointment_date:str
     status:AppointmentStatus
     
-    
+class CreateAppointment(AppointmentBase):
+    pass
+
+
+class UpdateAppointment(AppointmentBase):
+    pass
+
+
+
     
 
 
