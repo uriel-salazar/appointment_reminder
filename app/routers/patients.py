@@ -19,5 +19,7 @@ def create_patient(patient:CreatePatient ,db:Session = Depends(get_db)):
     return db_patient
 
 @router.put("")
-def update_patient(patient:U)
+def update_patient(patient:U):
+    pass
+
 

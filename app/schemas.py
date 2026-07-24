@@ -1,5 +1,5 @@
 from pydantic import BaseModel
-from app.models import AppointmentStatus
+from app.models.appointment import AppointmentStatus
 
 class CreatePatient(BaseModel):
     name:str
@@ -10,6 +10,8 @@ class CreateAppointment(BaseModel):
     appointment_info:str
     appointment_date:str
     status:AppointmentStatus
+    
+    
     
 
 
