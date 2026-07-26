@@ -8,9 +8,10 @@ Base.metadata.create_all(bind = engine)
 
 app.include_router(patients.router, prefix="/patients",tags=["patients"])
 app.include_router(appointments.router,prefix="/appointments",tags=["appointments"])
-
+app.include_router(dentist.router,prefix = '/dentists',tags = ["dentists"])
 
 
 if __name__ == "__main__":
+    
     uvicorn.run("main:app", 
             host="localhost", reload=True)
