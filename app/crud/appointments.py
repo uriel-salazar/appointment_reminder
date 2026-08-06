@@ -1,3 +1,5 @@
+from fastapi.exceptions import HTTPException
+from sqlalchemy.exc import IntegrityError
 from sqlalchemy.orm import Session
 
 from models.appointment import Appointment
@@ -15,7 +17,11 @@ def get_appointments(db: Session):
 def create_appointment(db: Session, appointment: CreateAppointment):
     db_appointment = Appointment(**appointment.model_dump())
     db.add(db_appointment)
-    db.commit()
+    try:
+        db.commit()
+    except IntegrityError:
+        db.rollback()
+        raise HTTPException(status_code=409, detail="Invalid patient_id or dentist_id")
     db.refresh(db_appointment)
     return db_appointment
 
@@ -28,8 +34,14 @@ def update_appointment(db: Session, appointment_id: int, appointment_data: Updat
     appointment.info = appointment_data.info
     appointment.date = appointment_data.date
     appointment.status = appointment_data.status
+    appointment.dentist_id = appointment_data.dentist_id
+    appointment.patient_id = appointment_data.patient_id
 
-    db.commit()
+    try:
+        db.commit()
+    except IntegrityError:
+        db.rollback()
+        raise HTTPException(status_code=409, detail="Invalid patient_id or dentist_id")
     db.refresh(appointment)
     return appointment
 
