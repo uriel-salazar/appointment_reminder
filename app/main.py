@@ -1,14 +1,14 @@
 from fastapi import FastAPI
 import uvicorn
 from database.db import Base, engine
-from routers import appointments, patients
+from routers import appointments, patients,dentists
 
 app = FastAPI()
 Base.metadata.create_all(bind = engine)
 
 app.include_router(patients.router, prefix="/patients",tags=["patients"])
 app.include_router(appointments.router,prefix="/appointments",tags=["appointments"])
-#app.include_router(dentist.router,prefix = '/dentists',tags = ["dentists"])
+#app.include_router(dentists.router,prefix = '/dentists',tags = ["dentists"])
 
 
 if __name__ == "__main__":

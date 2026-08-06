@@ -1,6 +1,6 @@
 from fastapi import APIRouter,Depends
 from models.appointment import Appointment
-from schemas import CreateAppointment
+from schemas import CreateAppointment,UpdateAppointment
 from sqlalchemy.orm import Session
 from database.db import get_db
 router = APIRouter()
@@ -12,8 +12,12 @@ def get(appointment_id:int,db:Session = Depends(get_db)):
 
 @router.post("")
 def create_appointment(appointment:CreateAppointment,db:Session = Depends(get_db)):
-    db_appointment= Appointment(**appointment.model_dump())
+    db_appointment = Appointment(**appointment.model_dump())
     db.add(appointment)
     db.commit()
     db.refresh(db_appointment)
     return db_appointment
+ 
+@router.put("/{appointment_id}")
+def update_appointment(appointment_id:int,db:Session = Depends(get_db)):
+   return db.query(Appointment).filter(Appointment.appointment_id == appointment_id).first()
