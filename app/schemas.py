@@ -1,4 +1,7 @@
+from datetime import date as date_type
+
 from pydantic import BaseModel
+
 from models.appointment import AppointmentStatus
 
 class PatientBase(BaseModel):
@@ -15,8 +18,8 @@ class UpdatePatient(PatientBase):
 
 
 class AppointmentBase(BaseModel):
-    appointment_info:str
-    appointment_date:str
+    info:str
+    date:date_type
     status:AppointmentStatus
     
 class CreateAppointment(AppointmentBase):
