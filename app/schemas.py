@@ -21,6 +21,8 @@ class AppointmentBase(BaseModel):
     info:str
     date:date_type
     status:AppointmentStatus
+    dentist_id:int
+    patient_id:int
     
 class CreateAppointment(AppointmentBase):
     pass

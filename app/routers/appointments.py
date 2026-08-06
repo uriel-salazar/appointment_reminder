@@ -4,7 +4,9 @@ from sqlalchemy.orm import Session
 
 from crud.appointments import create_appointment as crud_create_appointment
 from crud.appointments import get_appointment as crud_get_appointment
+from crud.appointments import get_appointments as crud_get_appointments
 from crud.appointments import update_appointment as crud_update_appointment
+from crud.appointments import delete_appointment as crud_delete_appointment
 from database.db import get_db
 from schemas import CreateAppointment, UpdateAppointment
 
@@ -17,6 +19,11 @@ def get_appointment(appointment_id: int, db: Session = Depends(get_db)):
         raise HTTPException(status_code=404, detail="Appointment not found")
 
     return crud_get_appointment(db, appointment_id)
+ 
+ 
+@router.get("")
+def get_appointments(db: Session = Depends(get_db)):
+    return crud_get_appointments(db)
 
 
 @router.post("")
@@ -32,12 +39,15 @@ def update_existing_appointment(
 ):
    if not appointment_id:
       raise HTTPException(status_code = 404,detail = "Appointment not found" )
-   return crud_update_appointment(db, appointment_id, appointment)
+   updated = crud_update_appointment(db, appointment_id, appointment)
+   if updated is None:
+      raise HTTPException(status_code=404, detail="Appointment not found")
+   return updated
 
 
 @router.delete("/{appointment_id}")
 def delete_appointment(appointment_id: int, db: Session = Depends(get_db)):
-    if not appointment_id:
-        raise HTTPException(status_code = 404, detail = "Appointment not found")
-
-    return
+    appointment = crud_delete_appointment(db, appointment_id)
+    if not appointment:
+        raise HTTPException(status_code=404, detail="Appointment not found")
+    return {"detail": "Appointment deleted"}

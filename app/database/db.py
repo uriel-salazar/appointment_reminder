@@ -1,4 +1,5 @@
 <<<<<<< HEAD
+<<<<<<< HEAD
 from sqlalchemy import create_engine
 from sqlalchemy.orm import DeclarativeBase, sessionmaker
 from dotenv import load_dotenv
@@ -24,6 +25,8 @@ def get_db():
         db.close()
 
 =======
+=======
+>>>>>>> dev
 from sqlalchemy import create_engine
 from sqlalchemy.orm import DeclarativeBase, sessionmaker
 from dotenv import load_dotenv
@@ -48,4 +51,7 @@ def get_db():
     finally:
         db.close()
 
+<<<<<<< HEAD
+>>>>>>> dev
+=======
 >>>>>>> dev
