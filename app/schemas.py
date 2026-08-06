@@ -15,8 +15,8 @@ class UpdatePatient(PatientBase):
 
 
 class AppointmentBase(BaseModel):
-    appointment_info:str
-    appointment_date:str
+    info:str
+    date:str
     status:AppointmentStatus
     
 class CreateAppointment(AppointmentBase):
