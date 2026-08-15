@@ -4,6 +4,8 @@ from pydantic import BaseModel
 
 from models.appointment import AppointmentStatus
 
+
+# Patient Schemas : 
 class PatientBase(BaseModel):
     name:str
     info:str
@@ -16,7 +18,7 @@ class CreatePatient(PatientBase):
 class UpdatePatient(PatientBase):
     pass
 
-
+# Appointment Schemas : 
 class AppointmentBase(BaseModel):
     info:str
     date:date_type
@@ -31,6 +33,24 @@ class CreateAppointment(AppointmentBase):
 class UpdateAppointment(AppointmentBase):
     pass
 
+#  Dentist's Schemas  :
+class DentistBase(BaseModel):
+    name: str
+    last_name: str 
+    phone:str
+    
+    
+class CreateDentist(DentistBase):
+    pass
+    
+    
+class UpdateDentist(BaseModel):
+    pass
+
+
+
+
+    
 
 
     
