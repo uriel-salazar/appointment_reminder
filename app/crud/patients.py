@@ -2,7 +2,7 @@ from fastapi.exceptions import HTTPException
 from sqlalchemy.exc import IntegrityError
 from sqlalchemy.orm import Session
 
-from models.appointment import Patient
+from models.patient import Patient
 from schemas import CreatePatient,UpdatePatient
 
 

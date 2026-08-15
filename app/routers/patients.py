@@ -47,7 +47,7 @@ def update_patient(patient_id:int,patient_data:UpdatePatient,db:Session = Depend
     
     
 @router.delete("/{patient_id}")
-def delete_patient(db: Session = Depends(get_db), patient_id:int ):
+def delete_patient(patient_id:int, db: Session = Depends(get_db)):
     patient = crud_delete_patient(db,patient_id)
     if not patient:
         raise HTTPException(status_code = 404,detail =" Patient not found ")
