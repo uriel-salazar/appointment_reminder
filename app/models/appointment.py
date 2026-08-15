@@ -32,5 +32,5 @@ class Appointment(Base):
     )
     patient_id: Mapped[int] = mapped_column(ForeignKey("patient.patient_id"))
 
-    patient: Mapped["Patient"] = relationship(back_populates="appointments")
+    patient: Mapped["Patient"] = relationship(back_populates = "appointments")
     

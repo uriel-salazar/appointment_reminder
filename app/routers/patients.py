@@ -7,12 +7,24 @@ from schemas import CreatePatient,UpdatePatient
 
 from crud.patients import create_patient as crud_create_patient
 from crud.patients import delete_patient as crud_delete_patient
+from crud.patients import get_patients as crud_get_patients
 from database.db import get_db
 router = APIRouter()
 
 @router.get("/{patient_id}")
 def get_patient(patient_id: int, db: Session = Depends(get_db)):
     return db.query(Patient).filter(Patient.patient_id == patient_id).first()
+
+
+@router.get("/")
+def get_patients(db: Session = Depends(get_db)):
+    patients = crud_get_patients(db)
+    if patients:
+        return crud_get_patients(db)
+    raise HTTPException(status_code = 404,detail= 'No patients available')
+        
+
+
 
 @router.post("")
 def create_patient(patient:CreatePatient ,db:Session = Depends(get_db)):
@@ -51,5 +63,7 @@ def delete_patient(patient_id:int, db: Session = Depends(get_db)):
     patient = crud_delete_patient(db,patient_id)
     if not patient:
         raise HTTPException(status_code = 404,detail =" Patient not found ")
+    
+    raise HTTPException(status_code = 200,detail='Patient deleted succesfully')
 
 
