@@ -44,7 +44,7 @@ class CreateDentist(DentistBase):
     pass
     
     
-class UpdateDentist(BaseModel):
+class UpdateDentist(DentistBase):
     pass
 
 
