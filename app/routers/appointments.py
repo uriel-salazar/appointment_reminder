@@ -51,7 +51,11 @@ def delete_appointment(appointment_id: int, db: Session = Depends(get_db)):
     if not appointment:
         raise HTTPException(status_code=404, detail="Appointment not found")
 <<<<<<< HEAD
+<<<<<<< HEAD
     return {"detail": "Appointment deleted"}
+=======
+    return {"detail": "Appointment deleted"}
+>>>>>>> dev
 =======
     return {"detail": "Appointment deleted"}
 >>>>>>> dev
